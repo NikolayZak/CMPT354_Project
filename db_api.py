@@ -55,13 +55,20 @@ CREATE TABLE IF NOT EXISTS Booking(
     PRIMARY KEY (location, startTime)
 );
 
-CREATE TABLE IF NOT EXISTS EventInterest(
-    eventID INTEGER,
-    itemType VARCHAR(50),
-    
-    FOREIGN KEY (eventID) REFERENCES Event(eventID),
-    PRIMARY KEY (eventID, itemType)
-)"""
+CREATE TABLE IF NOT EXISTS Librarian(
+    customerID INTEGER PRIMARY KEY,
+
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID)
+);
+
+CREATE TABLE IF NOT EXISTS Volunteer(
+    customerID INTEGER PRIMARY KEY,
+    Vtime TIME,
+    Vdate DATE,
+
+    FOREIGN KEY (customerID) REFERENCE Customer(customerID)
+)
+"""
 
 
 class Database:
@@ -70,3 +77,27 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute(SCHEMA)
         self.conn.commit()
+
+    def Close(self):
+        self.conn.close()
+
+    def FindItem(self, name, type):
+        return
+
+    def BorrowItem(self, itemID):
+        return
+
+    def ReturnItem(self, itemID):
+        return
+
+    def DonateItem(self, name, type):
+        return
+
+    def CreateEvent(self, name, type, description, interests, locations, startTime, endTime):
+        return
+
+    def FindEvent(self, name, date):
+        return
+
+    def Volunteer(self, customerID, time, date):
+        return
