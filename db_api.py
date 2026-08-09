@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Volunteer(
     Vtime TIME,
     Vdate DATE,
 
-    FOREIGN KEY (customerID) REFERENCE Customer(customerID)
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 )
 """
 
@@ -74,8 +74,9 @@ CREATE TABLE IF NOT EXISTS Volunteer(
 class Database:
     def __init__(self):
         self.conn = sqlite3.connect("library.db")
-        cursor = self.conn.cursor()
-        cursor.execute(SCHEMA)
+        self.cursor = self.conn.cursor()
+
+        self.cursor.executescript(SCHEMA)
         self.conn.commit()
 
     def Close(self):
