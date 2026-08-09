@@ -1,6 +1,3 @@
-import sqlite3
-
-SCHEMA = """
 CREATE TABLE IF NOT EXISTS Customer(
     customerID INTEGER PRIMARY KEY AUTOINCREMENT,
     firstName VARCHAR(50),
@@ -68,37 +65,12 @@ CREATE TABLE IF NOT EXISTS Volunteer(
 
     FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 )
-"""
 
+CREATE TABLE IF NOT EXISTS EventGuest(
+    customerID INTEGER,
+    eventID INTEGER,
 
-class Database:
-    def __init__(self):
-        self.conn = sqlite3.connect("library.db")
-        self.cursor = self.conn.cursor()
-
-        self.cursor.executescript(SCHEMA)
-        self.conn.commit()
-
-    def Close(self):
-        self.conn.close()
-
-    def FindItem(self, name, type):
-        return
-
-    def BorrowItem(self, itemID):
-        return
-
-    def ReturnItem(self, itemID):
-        return
-
-    def DonateItem(self, name, type):
-        return
-
-    def CreateEvent(self, name, type, description, interests, locations, startTime, endTime):
-        return
-
-    def FindEvent(self, name, date):
-        return
-
-    def Volunteer(self, customerID, time, date):
-        return
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+    FOREIGN KEY (eventID) REFERENCES Event(eventID),
+    PRIMARY KEY (customerID, eventID)
+);

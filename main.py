@@ -1,5 +1,5 @@
-from db_api import Database
-import interface
+from methods.db_api import Database
+import methods.interface as interface
 
 db = Database()
 
@@ -16,9 +16,9 @@ while(True):
             continue
         case 3: # Donate Item
             continue
-        case 4: # Create Event
+        case 4: # Find Event
             continue
-        case 5: # Find Event
+        case 5: # Register for an Event
             continue
         case 6: # Volunteer
             continue

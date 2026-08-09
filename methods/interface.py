@@ -1,13 +1,13 @@
 MenuItem = [
-    "Find Item",   # 0
-    "Borrow Item", # 1
-    "Return Item", # 2
-    "Donate Item", # 3
-    "Create Event",# 4
-    "Find Event",  # 5
-    "Volunteer",   # 6
-    "Ask For Help",# 7
-    "Exit"         # 8
+    "Find Item",              # 0
+    "Borrow Item",            # 1
+    "Return Item",            # 2
+    "Donate Item",            # 3
+    "Find Event",             # 4
+    "Register For an Event",  # 5
+    "Volunteer",              # 6
+    "Ask For Help",           # 7
+    "Exit"                    # 8
 ]
 
 
