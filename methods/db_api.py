@@ -15,7 +15,13 @@ class Database:
         self.conn.close()
 
     def FindItem(self, name, type):
-        return
+        self.cursor.execute("""
+            SELECT *
+            FROM Item
+            WHERE name LIKE ? AND type LIKE ?
+        """, (f"%{name}%", f"%{type}%"))
+
+        return self.cursor.fetchall()
 
     def BorrowItem(self, itemID):
         return

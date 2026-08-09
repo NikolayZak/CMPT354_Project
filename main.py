@@ -5,10 +5,14 @@ db = Database()
 
 print("Welcome to the library Database")
 while(True):
-    input = interface.GetInput()
+    user_selection = interface.GetInput()
 
-    match input:
+    match user_selection:
         case 0: # Find Item
+            item_name = input("Item name (if known): ")
+            item_type = input("Item type (if known): ")
+            information = db.FindItem(item_name, item_type)
+            print(information)
             continue
         case 1: # Borrow Item
             continue

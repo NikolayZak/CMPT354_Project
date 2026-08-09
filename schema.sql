@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS Volunteer(
     Vdate DATE,
 
     FOREIGN KEY (customerID) REFERENCES Customer(customerID)
-)
+);
 
 CREATE TABLE IF NOT EXISTS EventGuest(
     customerID INTEGER,
