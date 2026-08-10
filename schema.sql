@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS Customer(
     customerID INTEGER PRIMARY KEY AUTOINCREMENT,
     firstName VARCHAR(50),
@@ -24,7 +26,8 @@ CREATE TABLE IF NOT EXISTS Records(
 );
 
 CREATE TABLE IF NOT EXISTS FutureAddition(
-    name VARCHAR(50) PRIMARY KEY,
+    futureItemID INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(50),
     type VARCHAR(50),
     demand INTEGER DEFAULT 0
 );
@@ -74,3 +77,15 @@ CREATE TABLE IF NOT EXISTS EventGuest(
     FOREIGN KEY (eventID) REFERENCES Event(eventID),
     PRIMARY KEY (customerID, eventID)
 );
+
+CREATE TRIGGER IF NOT EXISTS prevent_double_borrow
+BEFORE INSERT ON Records
+WHEN NEW.returnDate IS NULL AND EXISTS (
+    SELECT 1
+    FROM Records
+    WHERE itemID = NEW.itemID
+      AND returnDate IS NULL
+)
+BEGIN
+    SELECT RAISE(ABORT, 'Item is already borrowed');
+END;
