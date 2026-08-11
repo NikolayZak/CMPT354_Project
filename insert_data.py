@@ -170,7 +170,7 @@ cursor.executemany("""
 """, events)
 
 cursor.executemany("""
-    INSERT INTO Records (customerID, itemID, checkoutDate, returnDate)
+    INSERT INTO Record (customerID, itemID, checkoutDate, returnDate)
     VALUES (?, ?, ?, ?)
 """, records)
 

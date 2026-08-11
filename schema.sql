@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Item(
     type VARCHAR(50)
 );
 
-CREATE TABLE IF NOT EXISTS Records(
+CREATE TABLE IF NOT EXISTS Record(
     recordID INTEGER PRIMARY KEY AUTOINCREMENT,
     customerID INTEGER,
     itemID INTEGER,
@@ -62,9 +62,10 @@ CREATE TABLE IF NOT EXISTS Librarian(
 );
 
 CREATE TABLE IF NOT EXISTS Volunteer(
-    customerID INTEGER PRIMARY KEY,
+    customerID INTEGER,
     Vtime TIME,
     Vdate DATE,
+    PRIMARY KEY (customerID, Vtime, Vdate)
 
     FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 );
@@ -79,10 +80,10 @@ CREATE TABLE IF NOT EXISTS EventGuest(
 );
 
 CREATE TRIGGER IF NOT EXISTS prevent_double_borrow
-BEFORE INSERT ON Records
+BEFORE INSERT ON Record
 WHEN NEW.returnDate IS NULL AND EXISTS (
     SELECT 1
-    FROM Records
+    FROM Record
     WHERE itemID = NEW.itemID
       AND returnDate IS NULL
 )
